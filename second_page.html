@@ -18,6 +18,7 @@
   </header>
 
   <main class="content">
+    <img src="" alt="testingsomething" class="profile-img" id="apiImage" />
     <h2>About Me</h2>
     <p>
       I’m a software engineer with a background in front-end development and UI/UX design.
@@ -38,4 +39,25 @@
     <p>FS</p>
   </footer>
 </body>
+<script>
+  fetch('https://collectionapi.metmuseum.org/public/collection/v1/objects/4000')
+    .then(response => response.json())
+    .then(data => {
+      // Assuming the API returns an object with an 'imageUrl' property
+      const imageUrl = data.primaryImage;
+      // Call the function to display the image
+      displayImage(imageUrl);
+    })
+    .catch(error => {
+      console.error('Error fetching image:', error);
+    });
+
+    function displayImage(url) {
+      const imgElement = document.getElementById('apiImage');
+      if (imgElement) {
+        imgElement.src = url;
+      }
+    }
+</script>
 </html>
+
